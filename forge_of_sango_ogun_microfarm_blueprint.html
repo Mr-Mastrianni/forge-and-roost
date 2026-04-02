@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge of Sango & Ogun | Micro-Farm Wealth Blueprint</title>
+  <style>
+    :root{
+      --bg:#0a0a0f;
+      --panel:#11131b;
+      --panel-2:#171a24;
+      --ink:#f5efe2;
+      --muted:#bdb6a7;
+      --line:rgba(255,255,255,.08);
+      --gold:#d6a84f;
+      --gold-2:#f0d48a;
+      --ember:#c94a2e;
+      --red:#8f1d14;
+      --steel:#7d8799;
+      --green:#698f57;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(214,168,79,.12), transparent 22%),
+        radial-gradient(circle at 85% 10%, rgba(201,74,46,.16), transparent 25%),
+        linear-gradient(180deg, #090a0e 0%, #0d1018 100%);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+    .noise:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.06;
+      background-image:
+        linear-gradient(transparent 50%, rgba(255,255,255,.03) 50%),
+        radial-gradient(rgba(255,255,255,.08) 0.4px, transparent 0.6px);
+      background-size:100% 3px, 8px 8px;
+      mix-blend-mode:soft-light;
+    }
+    .container{width:min(1180px, calc(100% - 32px)); margin:0 auto}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background:rgba(9,10,14,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.03em;
+    }
+    .brand-mark{
+      width:38px; height:38px; border-radius:12px;
+      background:conic-gradient(from 210deg, var(--red), var(--gold), #5f6777, var(--red));
+      box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 10px 30px rgba(201,74,46,.22);
+      position:relative;
+    }
+    .brand-mark:after{
+      content:"⚒";
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-size:18px; color:#fff5dc;
+      text-shadow:0 2px 12px rgba(0,0,0,.35);
+    }
+    .nav-links{display:flex; flex-wrap:wrap; gap:10px}
+    .nav-links a{
+      color:var(--muted); text-decoration:none; padding:9px 12px; border-radius:999px;
+      background:rgba(255,255,255,.03); border:1px solid var(--line); font-size:14px;
+    }
+    .nav-links a:hover{color:var(--ink); border-color:rgba(214,168,79,.35)}
+    .hero{
+      padding:72px 0 36px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:24px;
+    }
+    .hero-card,.panel{
+      background:linear-gradient(180deg, rgba(23,26,36,.88), rgba(14,16,23,.94));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:32px; overflow:hidden; position:relative}
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:auto -5% -45% auto;
+      width:360px; height:360px; border-radius:50%;
+      background:radial-gradient(circle, rgba(214,168,79,.16), transparent 62%);
+      filter:blur(12px);
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px; font-size:12px;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:#ffe9b3; background:rgba(214,168,79,.1); border:1px solid rgba(214,168,79,.2);
+    }
+    h1{
+      margin:18px 0 14px;
+      font-size:clamp(38px, 6vw, 72px);
+      line-height:.98; letter-spacing:-.04em;
+    }
+    .gradient-text{
+      background:linear-gradient(90deg, #fff4cd 0%, var(--gold-2) 25%, #f2d39f 40%, #ffceaf 60%, #ffdcc8 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .sub{
+      max-width:760px; color:var(--muted); font-size:18px; line-height:1.6;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px}
+    .btn{
+      border:1px solid var(--line); border-radius:14px; text-decoration:none;
+      color:var(--ink); padding:14px 18px; font-weight:700; display:inline-flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,.03); transition:.25s ease;
+    }
+    .btn:hover{transform:translateY(-2px); border-color:rgba(214,168,79,.4); box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(143,29,20,.75), rgba(214,168,79,.22));
+      border-color:rgba(214,168,79,.28);
+    }
+    .stats{
+      display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px;
+      padding:22px;
+    }
+    .stat{
+      background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:18px; padding:18px;
+    }
+    .stat small{display:block; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.08em}
+    .stat strong{font-size:28px}
+    .section{padding:18px 0 8px}
+    .section-header{
+      display:flex; align-items:end; justify-content:space-between; gap:20px;
+      margin:28px 0 18px;
+    }
+    .section-header h2{
+      margin:0; font-size:clamp(28px, 4vw, 44px); letter-spacing:-.03em;
+    }
+    .section-header p{margin:0; color:var(--muted); max-width:720px; line-height:1.6}
+    .cards{
+      display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(23,26,36,.85), rgba(15,17,24,.95));
+      border:1px solid var(--line); border-radius:22px; padding:20px; box-shadow:var(--shadow);
+      transform:translateY(14px); opacity:0;
+      transition:transform .55s cubic-bezier(.2,.7,.2,1), opacity .55s ease, border-color .2s ease;
+    }
+    .card.visible{transform:translateY(0); opacity:1}
+    .card:hover{border-color:rgba(214,168,79,.35)}
+    .chip{
+      display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px;
+      color:#f4dfb4; background:rgba(214,168,79,.1); border:1px solid rgba(214,168,79,.16);
+      margin-bottom:12px;
+    }
+    .card h3{margin:4px 0 8px; font-size:22px}
+    .card p{margin:0; color:var(--muted); line-height:1.65}
+    .stack{display:grid; gap:14px}
+    .accordion{
+      background:linear-gradient(180deg, rgba(23,26,36,.85), rgba(15,17,24,.95));
+      border:1px solid var(--line); border-radius:20px; overflow:hidden; box-shadow:var(--shadow);
+    }
+    .acc-btn{
+      width:100%; text-align:left; background:none; border:none; color:var(--ink);
+      padding:20px 22px; font-size:18px; font-weight:800; display:flex; justify-content:space-between; gap:18px;
+      cursor:pointer;
+    }
+    .acc-btn span:last-child{color:var(--gold-2)}
+    .acc-panel{
+      max-height:0; overflow:hidden; transition:max-height .35s ease;
+      border-top:1px solid transparent;
+    }
+    .accordion.open .acc-panel{border-top-color:var(--line)}
+    .acc-content{padding:18px 22px 22px}
+    .list{
+      display:grid; gap:10px; margin:0; padding:0; list-style:none;
+    }
+    .list li{
+      padding:12px 14px; border-radius:14px; background:rgba(255,255,255,.03); border:1px solid var(--line);
+      line-height:1.6; color:var(--muted);
+    }
+    .list strong{color:var(--ink)}
+    .roadmap{
+      display:grid; gap:16px;
+    }
+    .phase{
+      display:grid; grid-template-columns:92px 1fr; gap:16px;
+      padding:18px; border:1px solid var(--line); border-radius:20px;
+      background:linear-gradient(180deg, rgba(23,26,36,.82), rgba(15,17,24,.96));
+      box-shadow:var(--shadow);
+    }
+    .phase-num{
+      width:74px; height:74px; border-radius:20px; display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(143,29,20,.85), rgba(214,168,79,.25));
+      font-size:26px; font-weight:900; color:#fff2d3; border:1px solid rgba(214,168,79,.2);
+    }
+    .phase h3{margin:4px 0 8px; font-size:24px}
+    .phase p{margin:0 0 10px; color:var(--muted); line-height:1.65}
+    .mini{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:10px
+    }
+    .mini span{
+      padding:8px 10px; font-size:13px; border-radius:999px;
+      background:rgba(255,255,255,.04); border:1px solid var(--line); color:#e9dfc8;
+    }
+    .budget-grid{
+      display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px;
+    }
+    .budget{
+      padding:22px; border-radius:22px; border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(23,26,36,.85), rgba(15,17,24,.95));
+      box-shadow:var(--shadow);
+    }
+    .budget small{display:block; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
+    .budget strong{display:block; margin:10px 0 12px; font-size:36px}
+    .budget p{margin:0 0 14px; color:var(--muted); line-height:1.6}
+    .callout{
+      padding:20px 22px; border-radius:20px; border:1px solid rgba(214,168,79,.18);
+      background:linear-gradient(180deg, rgba(214,168,79,.09), rgba(143,29,20,.08));
+      color:#f7ead0;
+    }
+    .two{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    .footer{
+      padding:38px 0 70px; color:var(--muted);
+    }
+    .footer .sources{
+      display:grid; gap:8px; font-size:14px; line-height:1.6;
+      padding:18px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid var(--line);
+    }
+    .reveal{opacity:0; transform:translateY(16px); transition:all .6s ease}
+    .reveal.visible{opacity:1; transform:translateY(0)}
+    .divider{
+      height:1px; background:linear-gradient(90deg, transparent, rgba(214,168,79,.3), transparent);
+      margin:20px 0;
+    }
+    @media (max-width: 980px){
+      .hero-grid,.cards,.budget-grid,.two{grid-template-columns:1fr}
+      .phase{grid-template-columns:1fr}
+      .nav-inner{align-items:flex-start; flex-direction:column}
+    }
+  </style>
+</head>
+<body class="noise">
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <div>Forge of Sango & Ogun</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;">Micro-Farm Wealth Blueprint</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#concept">Concept</a>
+        <a href="#materials">Materials</a>
+        <a href="#budgets">Budgets</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#expansion">Expansion</a>
+        <a href="#legal">Legal</a>
+        <a href="#risks">Risks</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card reveal">
+        <div class="eyebrow">Thunder • Iron • Soil • Strategy</div>
+        <h1><span class="gradient-text">Forge of Sango & Ogun</span></h1>
+        <p class="sub">
+          A grounded, small-scale farm blueprint for turning <strong>2-3 Spangled Hatch chicks</strong> into a lawful, humane,
+          profit-minded side hustle, then into a formal agriculture business. Not fantasy. Not farm-core delusion. A real plan
+          with staged reinvestment, lean infrastructure, and expansion logic.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#roadmap">Enter the roadmap</a>
+          <a class="btn" href="#budgets">See startup costs</a>
+        </div>
+        <div class="divider"></div>
+        <div class="callout">
+          <strong>Core truth:</strong> 2-3 chicks are a <em>proof-of-system phase</em>, not an immediate money machine.
+          Use them to learn brooding, housing, feed discipline, predator control, local demand, and recordkeeping.
+          Profit begins when you expand into a small, stable flock and stack revenue streams.
+        </div>
+      </div>
+
+      <aside class="panel reveal">
+        <div class="stats">
+          <div class="stat">
+            <small>Lean starting point</small>
+            <strong>$180-$350</strong>
+            <div style="color:var(--muted);margin-top:8px;">Brooder-first, DIY-heavy, delay major building</div>
+          </div>
+          <div class="stat">
+            <small>Smarter starter</small>
+            <strong>$450-$950</strong>
+            <div style="color:var(--muted);margin-top:8px;">Predator-safe setup with durable basics</div>
+          </div>
+          <div class="stat">
+            <small>Time to first eggs</small>
+            <strong>~5-7 months</strong>
+            <div style="color:var(--muted);margin-top:8px;">Breed, sex, nutrition, and season matter</div>
+          </div>
+          <div class="stat">
+            <small>Best next move</small>
+            <strong>More poultry first</strong>
+            <div style="color:var(--muted);margin-top:8px;">Goats later, only after fencing and demand</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="concept" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>The concept</h2>
+          <p>Build a disciplined farm brand in phases. Start tiny, master operations, document everything, reinvest cash, and expand only when the current layer is stable.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="chip">Phase logic</div>
+          <h3>Stage 1: Proof, not pressure</h3>
+          <p>Use 2-3 chicks to test your housing, labor rhythm, local rules, predator risk, feed usage, and daily maintenance. This is a low-cost apprenticeship with skin in the game.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Cash flow</div>
+          <h3>Stage 2: Build a real flock</h3>
+          <p>Once systems work, scale to a small laying or breeder group. The practical early money is eggs, chicks, composted litter, local preorders, and brand trust.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Entity growth</div>
+          <h3>Stage 3: Farm as company</h3>
+          <p>Formalize when revenue, liability, inventory, and expansion justify it. Then add stronger bookkeeping, permits as needed, brand packaging, and possibly second-species income.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Title ideas</h2>
+          <p>Because “random chicken side hustle dot jpeg” is not a brand. These are stronger.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="chip">Top pick</div><h3>Forge of Sango & Ogun</h3><p>Thunder for force, iron for labor, forge for disciplined abundance.</p></article>
+        <article class="card"><div class="chip">Alternative</div><h3>Sango’s Fire, Ogun’s Field</h3><p>More lyrical, still strong, good for a farm and lifestyle brand.</p></article>
+        <article class="card"><div class="chip">Alternative</div><h3>The Forge and the Flock</h3><p>Clean, memorable, and easier for broad agricultural scaling.</p></article>
+      </div>
+    </section>
+
+    <section id="materials" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Startup materials</h2>
+          <p>Start with a brooder and a future-safe mindset. Do not overbuild before the birds prove you can maintain rhythm.</p>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="accordion open reveal">
+          <button class="acc-btn"><span>Brooder essentials for 2-3 chicks</span><span>−</span></button>
+          <div class="acc-panel" style="max-height: 650px;">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Brooder container:</strong> large tote, stock tank, or DIY brooder box with enough room to expand as chicks grow.</li>
+                <li><strong>Heat source:</strong> radiant brooder plate is safer long term; heat lamp works but requires stricter fire discipline.</li>
+                <li><strong>Bedding:</strong> pine shavings, not slick surfaces.</li>
+                <li><strong>Chick feeder + waterer:</strong> small starter size is enough at first.</li>
+                <li><strong>Starter feed:</strong> 20% chick starter/grower crumble.</li>
+                <li><strong>Thermometer:</strong> helpful so you are not guessing like a mystic with a flashlight.</li>
+                <li><strong>Electrolytes/vitamins:</strong> useful if chicks arrive stressed.</li>
+                <li><strong>Small cleaning kit:</strong> scoop, gloves, trash bags, mild disinfectant safe for poultry areas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion reveal">
+          <button class="acc-btn"><span>Housing, run, and predator protection</span><span>+</span></button>
+          <div class="acc-panel">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Small coop or secure shelter:</strong> needed once birds feather out and move outside.</li>
+                <li><strong>1/2-inch hardware cloth:</strong> better than flimsy chicken wire for predator defense.</li>
+                <li><strong>Basic framing lumber:</strong> enough for a small starter coop or run frame.</li>
+                <li><strong>Fasteners and latches:</strong> raccoon-resistant hardware matters.</li>
+                <li><strong>Tarp or roofing panel:</strong> weather protection for run or coop roof.</li>
+                <li><strong>Temporary fencing or small pen:</strong> useful if supervised daytime outdoor access is available.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion reveal">
+          <button class="acc-btn"><span>Optional but smart upgrades</span><span>+</span></button>
+          <div class="acc-panel">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Feed storage bin:</strong> protects feed from moisture, rodents, and waste.</li>
+                <li><strong>Solar coop light:</strong> helpful in winter chores, not magic.</li>
+                <li><strong>Trail camera:</strong> useful if predator losses become a concern.</li>
+                <li><strong>Scale + notebook or spreadsheet:</strong> begin recordkeeping from day one.</li>
+                <li><strong>Simple branding tools:</strong> farm name, social page, basic photo system for documenting growth and future sales.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Build or buy?</h2>
+          <p>The cheapest mistake is not always the cheapest option. Predator loss, bad airflow, and junk prefab coops can erase “savings” fast.</p>
+        </div>
+      </div>
+      <div class="two">
+        <div class="panel reveal" style="padding:22px;">
+          <h3 style="margin-top:0;">Best low-cost recommendation</h3>
+          <ul class="list">
+            <li><strong>Start with a brooder only.</strong> Do not build a full permanent setup until the chicks are thriving.</li>
+            <li><strong>When outdoor housing becomes necessary, build small and secure.</strong> A simple DIY shelter plus predator-proof run beats many cheap prefab coops.</li>
+            <li><strong>Delay big pens and fancy structures.</strong> Build only what current bird count requires.</li>
+            <li><strong>Prioritize hardware cloth and secure latches.</strong> These matter more than farmhouse aesthetics.</li>
+          </ul>
+        </div>
+        <div class="panel reveal" style="padding:22px;">
+          <h3 style="margin-top:0;">Avoid these early traps</h3>
+          <ul class="list">
+            <li><strong>Overbuilding for 2-3 birds.</strong> Tiny scale does not justify a mini-estate.</li>
+            <li><strong>Buying weak prefab coops without reinforcement.</strong> Cute is not predator-proof.</li>
+            <li><strong>Adding goats too early.</strong> Fencing, minerals, parasite management, and shelter costs jump fast.</li>
+            <li><strong>Assuming immediate breeding income.</strong> You need enough birds, the right sex ratio, healthy stock, and buyers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="budgets" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Startup budgets</h2>
+          <p>These are grounded estimate bands using current retail references for chick feed, hardware cloth, and live-bird pricing anchors. Local costs will move around, because markets insist on having moods.</p>
+        </div>
+      </div>
+      <div class="budget-grid">
+        <article class="budget reveal">
+          <small>Bare minimum</small>
+          <strong>$180-$350</strong>
+          <p>Use a tote brooder, small feeder/waterer, pine shavings, starter feed, and a modest emergency buffer. Outdoor housing is delayed or improvised temporarily with close supervision.</p>
+          <ul class="list">
+            <li><strong>2-3 chicks:</strong> roughly $20-$45 total depending on source and shipping minimums</li>
+            <li><strong>Brooder setup:</strong> $40-$110</li>
+            <li><strong>Feed + bedding first month:</strong> $25-$55</li>
+            <li><strong>Basic supplies and contingency:</strong> $40-$140</li>
+          </ul>
+        </article>
+        <article class="budget reveal">
+          <small>Smart starter</small>
+          <strong>$450-$950</strong>
+          <p>This is the best balance for someone serious. It covers safer brooding, feed storage, a small secure coop/run path, and predator resistance without going full fantasy farm.</p>
+          <ul class="list">
+            <li><strong>Brooder, feeder, waterer, heat:</strong> $100-$220</li>
+            <li><strong>DIY coop/shelter materials:</strong> $125-$300</li>
+            <li><strong>Hardware cloth, latches, fasteners:</strong> $80-$180</li>
+            <li><strong>Feed, bedding, bins, misc.:</strong> $75-$250</li>
+          </ul>
+        </article>
+        <article class="budget reveal">
+          <small>Durable starter</small>
+          <strong>$950-$1,900</strong>
+          <p>For someone planning to scale quickly into a meaningful flock. Better materials, stronger housing, cleaner workflow, less need to rebuild later.</p>
+          <ul class="list">
+            <li><strong>Solid brooder and long-life tools:</strong> $150-$300</li>
+            <li><strong>Predator-safe coop + run:</strong> $400-$1,000</li>
+            <li><strong>Storage, fencing, backup supplies:</strong> $200-$400</li>
+            <li><strong>Emergency and expansion buffer:</strong> $200-$300</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="callout reveal" style="margin-top:16px;">
+        <strong>Monthly upkeep at tiny scale:</strong> usually modest, but still not zero. Expect roughly <strong>$20-$60/month</strong> at first for feed, bedding, replacements, and small supplies.
+        Costs rise with flock size, season, waste, and whether you buy premium feed or need predator repairs.
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Profit roadmap</h2>
+          <p>Compounding starts with restraint. Reinvest into the bottleneck that protects revenue or enables the next revenue stream.</p>
+        </div>
+      </div>
+      <div class="roadmap">
+        <article class="phase reveal">
+          <div class="phase-num">1</div>
+          <div>
+            <h3>Months 0-2: Learn the system</h3>
+            <p>Buy 2-3 chicks, run the brooder correctly, track all expenses, note feed use, and learn daily care without drowning in infrastructure costs. Photograph the process. Begin local market research for eggs, chicks, composted litter, and future breeding stock.</p>
+            <div class="mini"><span>Goal: zero avoidable losses</span><span>Track every dollar</span><span>Test local demand</span></div>
+          </div>
+        </article>
+
+        <article class="phase reveal">
+          <div class="phase-num">2</div>
+          <div>
+            <h3>Months 2-6: Stabilize housing and brand</h3>
+            <p>Move birds into secure outdoor housing when ready. Build a minimal farm identity: name, social page, local interest list, simple record sheet, and photo archive. If the original birds are not a viable productive mix, plan a second purchase based on your actual business goal: layers, breeders, or dual-purpose stock.</p>
+            <div class="mini"><span>Reinvest into housing</span><span>Create pre-sell audience</span><span>Choose your lane</span></div>
+          </div>
+        </article>
+
+        <article class="phase reveal">
+          <div class="phase-num">3</div>
+          <div>
+            <h3>Months 6-12: First practical cash flow</h3>
+            <p>If you have hens, eggs may begin around this window depending on breed and season. At this point, the smartest multiplication play is usually expanding to a small productive flock before jumping species. Sell eggs locally if allowed, or use them to build trust, barter, or create repeat buyer relationships. Compost litter for garden/farm use or future soil product sales.</p>
+            <div class="mini"><span>Eggs or hatching plan</span><span>Customer list</span><span>Tiny cash loop</span></div>
+          </div>
+        </article>
+
+        <article class="phase reveal">
+          <div class="phase-num">4</div>
+          <div>
+            <h3>Year 1-2: Small flock economics</h3>
+            <p>Scale into a controlled flock size that supports your chosen model. If your market values fertile eggs or chicks, improve breeder quality and sex ratio. If local buyers mostly want eating eggs, bias toward consistent layers and lower drama. Reinvest profits into better housing, incubation only if demand exists, and feed efficiency.</p>
+            <div class="mini"><span>Scale only profitable lines</span><span>Cut weak ideas early</span><span>Protect margins</span></div>
+          </div>
+        </article>
+
+        <article class="phase reveal">
+          <div class="phase-num">5</div>
+          <div>
+            <h3>Year 2+: Add second species only with proof</h3>
+            <p>Goats can make sense later, but only after you have fencing, shelter, mineral plans, local buyers, and enough land rhythm to manage them well. Before goats, consider whether a larger poultry system, compost sales, plant starts, ducks, or branded farm content would yield better return for less complexity.</p>
+            <div class="mini"><span>Fence first</span><span>Buyer proof</span><span>No random expansion</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="expansion" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>How to multiply the money</h2>
+          <p>The first multiplication is not mystical. It is operational. Use each dollar to remove fragility or unlock the next revenue layer.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="chip">Best first reinvestment</div>
+          <h3>Predator-proof housing</h3>
+          <p>Protecting birds is more profitable than buying more birds into a weak setup. Fewer losses means every later dollar works harder.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Next reinvestment</div>
+          <h3>Increase productive flock count</h3>
+          <p>A slightly larger, well-managed poultry setup usually beats adding goats too soon. More manageable, less fencing, lower feed shock, faster sales cycles.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Third reinvestment</div>
+          <h3>Customer system</h3>
+          <p>Names, preorders, social proof, repeat buyers, and local pickup systems matter. Market structure turns hobby output into business output.</p>
+        </article>
+      </div>
+
+      <div class="two" style="margin-top:16px;">
+        <div class="panel reveal" style="padding:22px;">
+          <h3 style="margin-top:0;">Are goats the best next move?</h3>
+          <p style="color:var(--muted);line-height:1.7;">
+            Not usually, not first. Goats add fencing demands, mineral management, parasite control, shelter, and more volatile infrastructure costs.
+            They can be worthwhile later if your land, market, and fencing are ready. If not, they become adorable chaos invoices.
+          </p>
+          <ul class="list">
+            <li><strong>Smart if:</strong> you have browse, buyers, strong fence plans, and enough time.</li>
+            <li><strong>Not smart if:</strong> you are still learning daily livestock rhythm or cash is tight.</li>
+          </ul>
+        </div>
+        <div class="panel reveal" style="padding:22px;">
+          <h3 style="margin-top:0;">Better expansion ideas before goats</h3>
+          <ul class="list">
+            <li><strong>Expand poultry first:</strong> stronger chance of early repeat revenue.</li>
+            <li><strong>Duck eggs or specialty poultry:</strong> useful if your local market supports it.</li>
+            <li><strong>Composted litter and garden inputs:</strong> small but synergistic.</li>
+            <li><strong>Farm content and education:</strong> build audience while the farm grows.</li>
+            <li><strong>Plant starts, herbs, or seedlings:</strong> can pair beautifully with a farm brand.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="legal" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Legal and business roadmap</h2>
+          <p>Start like a business before you formally become one. The paperwork should arrive as a crown on order, not a panic button after confusion.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="chip">Now</div>
+          <h3>Track from day one</h3>
+          <p>Keep a simple ledger for chicks, feed, bedding, housing, repairs, losses, sales, and labor time. Separate farm spending from personal spending immediately.</p>
+        </article>
+        <article class="card">
+          <div class="chip">When revenue appears</div>
+          <h3>Validate local rules</h3>
+          <p>Check zoning, backyard poultry limits, rooster rules, sales rules, and any local livestock restrictions before scaling or adding goats.</p>
+        </article>
+        <article class="card">
+          <div class="chip">When growth is real</div>
+          <h3>Formalize the entity</h3>
+          <p>Once sales repeat, assets grow, and liability becomes real, research the best legal structure for your state and goals. Build with bookkeeping and insurance in mind.</p>
+        </article>
+      </div>
+
+      <div class="callout reveal" style="margin-top:16px;">
+        <strong>What to track:</strong> income, expenses, assets, liabilities, bird counts, hatch rates if applicable, mortality, feed consumption, customer list, pricing history, and reinvestment decisions.
+      </div>
+    </section>
+
+    <section id="risks" class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Risks and how to reduce them</h2>
+          <p>Most small-farm losses are not dramatic acts of fate. They are boring, preventable leaks with feathers, wire, mud, and bad timing.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="chip">Biology</div>
+          <h3>Mortality and stress</h3>
+          <p>Reduce with proper brooder heat, clean water, quality feed, low-stress handling, and solid sanitation.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Predators</div>
+          <h3>Night losses</h3>
+          <p>Use hardware cloth, secure doors, buried apron where needed, and strong latches. Chicken wire alone is not enough.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Finance</div>
+          <h3>Overbuilding too early</h3>
+          <p>Delay major infrastructure until the current scale proves itself. Build in layers.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Market</div>
+          <h3>No buyer system</h3>
+          <p>Do not expand based on vibes. Build demand first through local relationships, preorders, and visible consistency.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Operations</div>
+          <h3>Feed cost creep</h3>
+          <p>Buy deliberately, store properly, and track waste. Feed leaks can quietly eat margins.</p>
+        </article>
+        <article class="card">
+          <div class="chip">Expansion</div>
+          <h3>Adding goats too soon</h3>
+          <p>Only do it after fencing, forage plans, and local demand are confirmed. Otherwise you buy complexity before profit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header reveal">
+        <div>
+          <h2>Revenue stack by stage</h2>
+          <p>Sequence matters more than ambition.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="accordion reveal">
+          <button class="acc-btn"><span>Short term: first 6 months</span><span>+</span></button>
+          <div class="acc-panel">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Main objective:</strong> system mastery, not heavy sales.</li>
+                <li><strong>Possible money:</strong> modest content building, brand development, preorder interest, maybe small local interest list.</li>
+                <li><strong>Best use of time:</strong> operations, documentation, learning, local demand discovery.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion reveal">
+          <button class="acc-btn"><span>Medium term: 6-18 months</span><span>+</span></button>
+          <div class="acc-panel">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Likely first real revenue:</strong> eggs, small breeder sales, fertile eggs if your setup supports it.</li>
+                <li><strong>Support revenue:</strong> composted litter, farm-brand products, simple local farm experiences, seedlings or herbs if aligned.</li>
+                <li><strong>Reinvest into:</strong> housing, flock quality, feed storage, customer workflow.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion reveal">
+          <button class="acc-btn"><span>Long term: 18 months+</span><span>+</span></button>
+          <div class="acc-panel">
+            <div class="acc-content">
+              <ul class="list">
+                <li><strong>Higher-value direction:</strong> better stock, hatch programs, second-species integration, branded agriculture business.</li>
+                <li><strong>Potential additions:</strong> goats, ducks, specialty poultry, educational content, farm workshops, plant starts.</li>
+                <li><strong>Rule:</strong> each new layer must pay for its own complexity.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <h2>Source notes</h2>
+          <p>These cost anchors and planning notes were used to keep the blueprint tethered to reality.</p>
+        </div>
+      </div>
+      <div class="sources reveal">
+        <div><strong>Retail cost anchors:</strong> Tractor Supply listings show chick starter/grower feed in roughly the high teens to upper twenties for 50-lb options depending on brand and formula, and live chick packages often start far above the cost of just 2-3 birds because hatchery and store listings commonly bundle in higher minimum counts.</div>
+        <div><strong>Predator protection:</strong> Home Depot hardware cloth listings put 1/2-inch mesh rolls roughly in the $58-$94 range for common sizes, which is why secure housing changes the startup math quickly.</div>
+        <div><strong>Goat reality check:</strong> Farm and Dairy market references show goats can be inexpensive to buy at some sales, but acquisition price is not the true startup cost. Fence, shelter, health, and handling infrastructure are what matter.</div>
+        <div><strong>Planning logic:</strong> USDA beginner-farmer and farm-business resources stress business planning, recordkeeping, and phased growth. Penn State Extension materials also note goat fencing needs to be genuinely goat-tight, not optimistic.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveal = new IntersectionObserver((entries)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    }, {threshold:0.12});
+
+    document.querySelectorAll('.reveal, .card').forEach(el => reveal.observe(el));
+
+    document.querySelectorAll('.accordion').forEach(acc=>{
+      const btn = acc.querySelector('.acc-btn');
+      const panel = acc.querySelector('.acc-panel');
+      btn.addEventListener('click', ()=>{
+        const open = acc.classList.contains('open');
+        document.querySelectorAll('.accordion').forEach(a=>{
+          if(a !== acc){
+            a.classList.remove('open');
+            const p = a.querySelector('.acc-panel');
+            const s = a.querySelector('.acc-btn span:last-child');
+            p.style.maxHeight = null;
+            s.textContent = '+';
+          }
+        });
+        acc.classList.toggle('open');
+        if(!open){
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          btn.querySelector('span:last-child').textContent = '−';
+        } else {
+          panel.style.maxHeight = null;
+          btn.querySelector('span:last-child').textContent = '+';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

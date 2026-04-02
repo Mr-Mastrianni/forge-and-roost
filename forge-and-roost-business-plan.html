@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Forge & The Roost — From 3 Chicks to an Agricultural Empire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --text-primary: #f5f5f0;
+            --text-secondary: #a0a0a0;
+            --accent-gold: #c9a227;
+            --accent-amber: #d4a017;
+            --accent-iron: #8a8a8a;
+            --accent-fire: #b7410e;
+            --border: #2a2a2a;
+            --success: #4a7c59;
+            --warning: #b8860b;
+            --danger: #8b2635;
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-amber);
+            margin-bottom: 1rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 6rem;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(183, 65, 14, 0.05) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-amber);
+            color: var(--accent-amber);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: #e0b030;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            border-color: rgba(201, 162, 39, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--accent-gold);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .card p, .card li {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+
+        .card li {
+            padding-left: 1.25rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .card li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent-amber);
+        }
+
+        /* Expandable sections */
+        .expandable {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+
+        .expandable-header {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.125rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .expandable-header:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .expandable-header .icon {
+            transition: transform 0.3s ease;
+            color: var(--accent-gold);
+        }
+
+        .expandable.active .expandable-header .icon {
+            transform: rotate(180deg);
+        }
+
+        .expandable-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+
+        .expandable.active .expandable-body {
+            max-height: 2000px;
+        }
+
+        .expandable-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-fire), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-gold);
+            transform: translateX(-5px);
+        }
+
+        .timeline-item.active::before {
+            background: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .timeline-phase {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-amber);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.375rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content {
+            color: var(--text-secondary);
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9375rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table th {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .data-table td {
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .price-tag {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Progress bars */
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber));
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-success {
+            background: rgba(74, 124, 89, 0.15);
+            color: #6ab07a;
+        }
+
+        .badge-warning {
+            background: rgba(184, 134, 11, 0.15);
+            color: #d4a017;
+        }
+
+        .badge-danger {
+            background: rgba(139, 38, 53, 0.15);
+            color: #c95a6b;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        .highlight-box {
+            background: rgba(201, 162, 39, 0.08);
+            border-left: 3px solid var(--accent-gold);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-gold);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            nav, .scroll-indicator, .cta-group {
+                display: none;
+            }
+            
+            .expandable-body {
+                max-height: none !important;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .card {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="#" class="logo">⚒ Forge & Roost</a>
+        <ul class="nav-links">
+            <li><a href="#model">Model</a></li>
+            <li><a href="#startup">Startup</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#expansion">Expansion</a></li>
+            <li><a href="#legal">Legal</a></li>
+            <li><a href="#risks">Risks</a></li>
+        </ul>
+        <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-eyebrow">An Agricultural Empire Strategy</div>
+            <h1>The Forge &amp; The Roost</h1>
+            <p class="hero-subtitle"></p>
+            <p class="hero-tagline">A realistic, ground-up business plan for transforming 2–3 Spangled Hatch chicks into a lawful, scalable, and diversified agricultural company. No fantasy numbers. No romanticized shortcuts. Just iron will, patient capital, and strategic growth.</p>
+            <div class="cta-group">
+                <a href="#model" class="btn btn-primary">Explore the Plan</a>
+                <a href="#startup" class="btn btn-secondary">View Costs</a>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span></span>
+    </div>
+</header>
+
+<main>
+
+<!-- BRAND CONCEPT -->
+<section id="brand" class="fade-in">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Brand Identity</div>
+            <h2>The Spirit of the Enterprise</h2>
+            <p>This venture is named after the union of Ogun — the Orisha of iron, labor, and clearing paths — and Sango — the Orisha of thunder, fire, and righteous power. The forge represents discipline, infrastructure, and the unglamorous work of building. The roost represents the living empire that grows from that labor. Together, they symbolize an agricultural business founded on strength, patience, and strategic dominance.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">⚒</div>
+                <h3>Selected Title</h3>
+                <p><strong>The Forge &amp; The Roost</strong><br>Agricultural Ventures</p>
+                <p style="margin-top:0.75rem; font-size:0.875rem; color:var(--text-secondary);">Subtitle: "From spark to empire — one disciplined harvest at a time."</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔥</div>
+                <h3>Alternative Titles</h3>
+                <ul>
+                    <li>Iron Feather Collective</li>
+                    <li>Ogun's Anvil Farmworks</li>
+                    <li>Thunderbrood Ventures</li>
+                    <li>The Spangled Forge</li>
+                    <li>Ash &amp; Feather Agriculture</li>
+                    <li>Sango's Spark Farm Co.</li>
+                    <li>Hammer &amp; Hatch Heritage</li>
+                    <li>Emberroot Agricultural Group</li>
+                    <li>Steel Pen Farming</li>
+                    <li>The Red Soil Syndicate</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Brand Positioning</h3>
+                <p>We do not sell "cute backyard chickens." We build disciplined, humane, and profitable agricultural enterprises starting from the smallest viable unit of capital. Every decision is weighed for return, risk, and reproducibility.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section id="model" class="fade-in" style="background:var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Revenue Architecture</div>
+            <h2>The Realistic Business Model</h2>
+            <p>Starting with just 2–3 Spangled Hatch chicks means you are beginning with a heritage gamefowl breed prized for hardiness, distinctive plumage, and breeding value — not industrial egg production. Your early revenue will be modest. Your long-term leverage comes from genetics, reputation, and strategic diversification.</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Critical Reality Check:</strong> Spangled Hatch birds are valued as breeding stock and exhibition fowl, not high-volume layers. At peak, a healthy hen may lay 3–4 eggs per week. With only 2–3 chicks, your initial genetic pool is dangerously narrow. Selling "breeding stock" from such a tiny base is biologically irresponsible. You must introduce unrelated bloodlines before you can ethically market yourself as a breeder.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon" style="background:rgba(74,124,89,0.15); color:#6ab07a;">🌱</div>
+                <h3>Short-Term (Months 1–12)</h3>
+                <span class="badge badge-success">Cash Flow: Minimal</span>
+                <ul style="margin-top:1rem;">
+                    <li><strong>Table Eggs:</strong> If your chicks are hens, expect 1–2 dozen eggs/week at peak. Revenue: ~$20–40/month at $5–6/dozen.</li>
+                    <li><strong>Manure/Compost:</strong> Small quantities to gardeners. $10–30/month possible once composted.</li>
+                    <li><strong>Content/Education:</strong> Document the journey. Build a social media presence or blog for future monetization.</li>
+                    <li><strong>Primary Goal:</strong> Keep birds alive. Learn husbandry. Build systems. Do not expect profit.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">🌾</div>
+                <h3>Medium-Term (Year 2–3)</h3>
+                <span class="badge badge-warning">Cash Flow: Growing</span>
+                <ul style="margin-top:1rem;">
+                    <li><strong>Fertile Hatching Eggs:</strong> Once you acquire an unrelated rooster and build genetic diversity, fertile eggs can sell for $3–8 each to enthusiasts.</li>
+                    <li><strong>Chick Sales:</strong> Quality Spangled Hatch chicks command $10–20 each from gamefowl and heritage breeders.</li>
+                    <li><strong>Started Pullets:</strong> Young birds raised to 8–12 weeks sell for $25–45 each, saving buyers brooder risk.</li>
+                    <li><strong>Primary Goal:</strong> Establish reputation, standard of care, and consistent output.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(201,162,39,0.15); color:var(--accent-gold);">🏛</div>
+                <h3>Long-Term (Year 3+)</h3>
+                <span class="badge badge-warning">Cash Flow: Scalable</span>
+                <ul style="margin-top:1rem;">
+                    <li><strong>Breeding Pairs/Trios:</strong> Proven, unrelated bloodlines sold as established breeding groups. $150–400+ per trio.</li>
+                    <li><strong>Additional Livestock:</strong> Diversified revenue from goats, ducks, rabbits, or bees.</li>
+                    <li><strong>Value-Added Products:</strong> Compost, workshops, farm tours, branded merchandise.</li>
+                    <li><strong>Primary Goal:</strong> Operate as a formal agriculture company with multiple income pillars.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STARTUP MATERIALS -->
+<section id="startup" class="fade-in">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Foundation</div>
+            <h2>Complete Startup Materials List</h2>
+            <p>Every empire starts with the right tools. Here is the full inventory of what you need to responsibly raise 2–3 chicks from day one to their first laying season.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🏠</div>
+                <h3>Brooder Setup</h3>
+                <ul>
+                    <li>Large plastic tote (45+ gal) or cardboard box</li>
+                    <li>Heat lamp with 250W red bulb + spare bulb</li>
+                    <li>Or: brooder heat plate (safer, more efficient)</li>
+                    <li>Digital thermometer/hygrometer</li>
+                    <li>Pine shavings or hemp bedding (NOT cedar)</li>
+                    <li>Paper towels for first 3–5 days</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍽</div>
+                <h3>Feed &amp; Nutrition</h3>
+                <ul>
+                    <li>20–22% protein chick starter crumble</li>
+                    <li>Chick-sized gravity feeder</li>
+                    <li>Chick waterer (shallow, not deep)</li>
+                    <li>Poultry vitamins/electrolytes (for stress recovery)</li>
+                    <li>Small dish for grit (after week 2)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡</div>
+                <h3>Coop &amp; Protection</h3>
+                <ul>
+                    <li>Predator-proof coop (minimum 4 sq ft per bird inside)</li>
+                    <li>Run/pen (minimum 10 sq ft per bird outside)</li>
+                    <li>½-inch hardware cloth (buried 12" underground as apron)</li>
+                    <li>Secure latches (raccoons open basic hooks)</li>
+                    <li>Nesting boxes (1 per 3 hens)</li>
+                    <li>Adult-sized feeder and waterer</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧰</div>
+                <h3>Tools &amp; Supplies</h3>
+                <ul>
+                    <li>Scoop/shovel for bedding changes</li>
+                    <li>Dust mask and gloves for cleaning</li>
+                    <li>White vinegar or poultry-safe disinfectant</li>
+                    <li>Basic first aid: antiseptic spray, gauze, cornstarch</li>
+                    <li>Egg basket or collection container</li>
+                    <li>Headlamp/flashlight for evening checks</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Optional Upgrades</h3>
+                <ul>
+                    <li>Automatic coop door</li>
+                    <li>Trail camera (to identify predators)</li>
+                    <li>Incubator (only after 18+ months of experience)</li>
+                    <li>Deep litter system materials</li>
+                    <li>Composting bin for manure management</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚠️</div>
+                <h3>What to Skip Early</h3>
+                <ul>
+                    <li>Incubator (learn bird husbandry first)</li>
+                    <li>Expensive prefab coops (often flimsy/too small)</li>
+                    <li>Chicken wire (predators rip through it)</li>
+                    <li>Fancy treats (starter feed is complete nutrition)</li>
+                    <li>Diapers/house chickens (distracts from farm business)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BUILD VS BUY -->
+<section class="fade-in" style="background:var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Infrastructure Strategy</div>
+            <h2>Build vs. Buy: The Smart Path</h2>
+            <p>Starting with only 2–3 chicks, your capital must stretch. Here is the recommended decision framework for each major infrastructure choice.</p>
+        </div>
+
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="card">
+                <h3>Brooder: <span style="color:var(--success);">DIY First</span></h3>
+                <p>Use a large plastic storage tote or thick cardboard box. Add a heat lamp clamped securely overhead. This costs under $40 and works perfectly for 2–3 chicks for 6–8 weeks. Do not buy a pre-made brooder unless you find one used for under $30.</p>
+            </div>
+            <div class="card">
+                <h3>Coop: <span style="color:var(--warning);">Build or Buy Used</span></h3>
+                <p>Most prefab coops under $400 are poorly made, too small, and predator-vulnerable. If you are not handy, buy a used shed or coop on Facebook Marketplace ($100–300) and reinforce it with hardware cloth. If you can use basic tools, building a simple 4×6 coop from plywood and 2×4s costs $200–350 and lasts years.</p>
+            </div>
+            <div class="card">
+                <h3>Run/Pen: <span style="color:var(--success);">Build</span></h3>
+                <p>A run is essentially a framed box covered in hardware cloth. PVC or 2×2 lumber frames with hardware cloth are easy to build for $75–150. Buying a run kit usually costs 2–3× as much. Bury the hardware cloth 12 inches out as an apron to stop digging predators.</p>
+            </div>
+            <div class="card">
+                <h3>Fencing: <span style="color:var(--warning);">Delay or DIY</span></h3>
+                <p>If you build a secure covered run, you do not need pasture fencing in year one. Free-ranging is nice but adds predator risk. Delay permanent fencing until you have 10+ birds and a revenue stream to justify it.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:2.5rem;">
+            <p><strong>Recommended Year-One Path:</strong> DIY brooder ($35) → Build simple coop from new/used materials ($250) → Build secure covered run ($100) → Reinforce everything with hardware cloth ($50). Total infrastructure: <strong>~$435</strong>. This is the sweet spot between cheap (which costs you birds) and overbuilt (which costs you capital you cannot afford to tie up).</p>
+        </div>
+    </div>
+</section>
+
+<!-- COST BREAKDOWN -->
+<section id="costs" class="fade-in">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Financial Reality</div>
+            <h2>Startup Cost Breakdown</h2>
+            <p>Three budget tiers based on research from 2024–2025 poultry supply pricing. Remember: these are estimates. Your local prices may vary ±20%.</p>
+        </div>
+
+        <div class="expandable active">
+            <button class="expandable-header" onclick="toggleExpand(this)">
+                <span>💰 Bare Minimum Budget</span>
+                <span class="icon">▼</span>
+            </button>
+            <div class="expandable-body">
+                <div class="expandable-content">
+                    <p class="mb-2">The absolute floor to get 2–3 chicks to adulthood. Higher risk due to cheaper equipment, but viable if you are resourceful.</p>
+                    <table class="data-table">
+                        <tr><th>Item</th><th>Cost</th></tr>
+                        <tr><td>3 Spangled Hatch chicks (straight run or sexed)</td><td class="price-tag">$30 – $60</td></tr>
+                        <tr><td>DIY brooder (cardboard box + heat lamp)</td><td class="price-tag">$30 – $50</td></tr>
+                        <tr><td>Starter feed (2 bags, 50 lb)</td><td class="price-tag">$35 – $50</td></tr>
+                        <tr><td>Chick feeder &amp; waterer</td><td class="price-tag">$15 – $25</td></tr>
+                        <tr><td>Bedding &amp; cleaning supplies</td><td class="price-tag">$20 – $35</td></tr>
+                        <tr><td>Used/repurposed coop materials</td><td class="price-tag">$100 – $200</td></tr>
+                        <tr><td>Hardware cloth &amp; fasteners for predator proofing</td><td class="price-tag">$40 – $75</td></tr>
+                        <tr><td><strong>Total Bare Minimum</strong></td><td class="price-tag"><strong>$270 – $495</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <button class="expandable-header" onclick="toggleExpand(this)">
+                <span>⚖️ Smart Starter Budget (Recommended)</span>
+                <span class="icon">▼</span>
+            </button>
+            <div class="expandable-body">
+                <div class="expandable-content">
+                    <p class="mb-2">The balanced recommendation: reliable equipment, safe housing, and a small emergency buffer.</p>
+                    <table class="data-table">
+                        <tr><th>Item</th><th>Cost</th></tr>
+                        <tr><td>3 quality Spangled Hatch chicks</td><td class="price-tag">$45 – $90</td></tr>
+                        <tr><td>Brooder setup (tote + heat plate + thermometer)</td><td class="price-tag">$80 – $130</td></tr>
+                        <tr><td>Starter &amp; grower feed (3 months)</td><td class="price-tag">$50 – $75</td></tr>
+                        <tr><td>Feeders, waterers, vitamins, bedding</td><td class="price-tag">$60 – $100</td></tr>
+                        <tr><td>Simple DIY coop (4×6, new materials)</td><td class="price-tag">$200 – $350</td></tr>
+                        <tr><td>Secure run with hardware cloth</td><td class="price-tag">$100 – $175</td></tr>
+                        <tr><td>Basic tools &amp; first aid supplies</td><td class="price-tag">$40 – $75</td></tr>
+                        <tr><td>Emergency vet/replacement bird buffer</td><td class="price-tag">$100</td></tr>
+                        <tr><td><strong>Total Smart Starter</strong></td><td class="price-tag"><strong>$675 – $995</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="expandable">
+            <button class="expandable-header" onclick="toggleExpand(this)">
+                <span>🏛 Durable Long-Term Budget</span>
+                <span class="icon">▼</span>
+            </button>
+            <div class="expandable-body">
+                <div class="expandable-content">
+                    <p class="mb-2">For those who want infrastructure that scales to 15+ birds without rebuilding.</p>
+                    <table class="data-table">
+                        <tr><th>Item</th><th>Cost</th></tr>
+                        <tr><td>3 premium Spangled Hatch chicks</td><td class="price-tag">$60 – $120</td></tr>
+                        <tr><td>Quality brooder (stock tank or wooden brooder)</td><td class="price-tag">$150 – $250</td></tr>
+                        <tr><td>Brooder plate &amp; backup heat source</td><td class="price-tag">$100 – $160</td></tr>
+                        <tr><td>Feed &amp; supplements (6-month supply)</td><td class="price-tag">$100 – $150</td></tr>
+                        <tr><td>8×10 solid wood coop (built or Amish-style kit)</td><td class="price-tag">$600 – $1,200</td></tr>
+                        <tr><td>Large predator-proof run or electric poultry netting</td><td class="price-tag">$300 – $600</td></tr>
+                        <tr><td>Composting system &amp; deep litter materials</td><td class="price-tag">$100 – $200</td></tr>
+                        <tr><td>Full first aid kit &amp; biosecurity supplies</td><td class="price-tag">$75 – $150</td></tr>
+                        <tr><td>Emergency &amp; expansion buffer</td><td class="price-tag">$300</td></tr>
+                        <tr><td><strong>Total Durable Budget</strong></td><td class="price-tag"><strong>$1,785 – $3,130</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:2rem;">
+            <p><strong>Monthly Upkeep Estimate (3 birds):</strong> Feed: $12–20 | Bedding: $5–10 | Miscellaneous: $5–10 | <strong>Total: ~$25–40/month</strong>. In year one, expect zero to minimal revenue. Budget accordingly.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- PROFIT ROADMAP -->
+<section id="roadmap" class="fade-in" style="background:var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Compounding Strategy</div>
+            <h2>The Profit-Growth Roadmap</h2>
+            <p>This is not a get-rich-quick scheme. It is a compounding asset strategy. Each phase reinvests 100% of revenue back into the business until the operation is self-sustaining and scalable.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item active">
+                <div class="timeline-phase">Phase 1 — Months 0–12</div>
+                <h3 class="timeline-title">The Spark: Survive &amp; Learn</h3>
+                <div class="timeline-content">
+                    <p><strong>Goal:</strong> Keep all birds alive and healthy. Learn daily husbandry, predator management, and biosecurity.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Do not sell anything yet. Focus on observation and documentation.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>If you have hens, collect eggs for personal use or give samples to neighbors to gauge interest.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Start tracking every expense in a spreadsheet (feed, bedding, supplies, time).</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span><strong>Reinvestment target:</strong> Save $300–500 for Phase 2 bloodline expansion.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 2 — Months 12–24</div>
+                <h3 class="timeline-title">The Forge: Build Genetic Diversity</h3>
+                <div class="timeline-content">
+                    <p><strong>Goal:</strong> Introduce unrelated bloodlines and expand to a sustainable breeding base.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Purchase 1 unrelated rooster and 2–3 unrelated hens from a reputable breeder. This is non-negotiable for genetic health.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Expand flock to 6–8 birds. Build or buy a second coop or expand the first.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Begin selling excess table eggs to neighbors. Expect $30–60/month.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span><strong>Reinvestment target:</strong> 100% of egg revenue + personal capital → better housing, feed in bulk, and an incubator.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 3 — Years 2–3</div>
+                <h3 class="timeline-title">The Flame: First Real Revenue</h3>
+                <div class="timeline-content">
+                    <p><strong>Goal:</strong> Transition from egg sales to breeding-stock sales.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Hatch your first deliberate clutch. Sell fertile hatching eggs ($3–8/ea) and day-old chicks ($10–20/ea).</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Cull heavily for quality. Only sell birds that represent your standard.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Start composting manure at scale. Bag and sell to gardeners ($2–5/bag).</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span><strong>Reinvestment target:</strong> Use profits to expand flock to 15–20 birds or fund your first secondary livestock.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Phase 4 — Years 3–5</div>
+                <h3 class="timeline-title">The Empire: Diversification &amp; Formalization</h3>
+                <div class="timeline-content">
+                    <p><strong>Goal:</strong> Become a multi-income agricultural operation with formal business structure.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Maintain 2–3 distinct Spangled Hatch bloodlines. Sell proven breeding trios for $200–400+.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Add secondary livestock (goats, ducks, or rabbits) based on market research and land availability.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Launch value-added streams: workshops, farm tours, branded content, or CSA partnerships.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Formalize as LLC or S-Corp. Separate all finances. Hire a bookkeeper if revenue exceeds $15k/year.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:2rem;">
+            <p><strong>The Reinvestment Rule:</strong> Until your operation generates consistent monthly profit equal to 3× your monthly feed bill, do not take personal distributions. Every dollar must go back into genetics, infrastructure, or diversification. This is the difference between a hobby and a business.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EXPANSION STRATEGY -->
+<section id="expansion" class="fade-in">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Strategic Growth</div>
+            <h2>Expansion Strategy: What Comes Next?</h2>
+            <p>Your poultry operation is the proof of concept. Once it is profitable and systematized, you will have capital and credibility to add new enterprises. But not all expansions are equal.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon" style="background:rgba(74,124,89,0.15); color:#6ab07a;">🐐</div>
+                <h3>Goats</h3>
+                <span class="badge badge-warning">Medium-High Risk</span>
+                <p style="margin-top:1rem;"><strong>Pros:</strong> High demand for meat and milk; brush-clearing services; breeding stock sales ($200–800/head).</p>
+                <p style="margin-top:0.75rem;"><strong>Cons:</strong> Require excellent fencing ($2–5/ft), shelter ($500+), and veterinary care. Escape artists. 12–18 month payback period. Need 1–2+ acres ideally.</p>
+                <p style="margin-top:0.75rem;"><strong>Verdict:</strong> Powerful long-term addition, but a steep infrastructure and learning jump from poultry. Best added in Year 3+ when you have $3,000+ in dedicated expansion capital.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(74,124,89,0.15); color:#6ab07a;">🦆</div>
+                <h3>Ducks</h3>
+                <span class="badge badge-success">Low Risk</span>
+                <p style="margin-top:1rem;"><strong>Pros:</strong> Use nearly the same infrastructure as chickens. Duck eggs command premium prices ($6–10/dozen). Hardy, excellent foragers. Fast growth for meat.</p>
+                <p style="margin-top:0.75rem;"><strong>Cons:</strong> Messy with water. Need access to water for bathing. Different predator vulnerabilities (night-blind).</p>
+                <p style="margin-top:0.75rem;"><strong>Verdict:</strong> The smartest intermediate expansion. Add ducks in Year 2 using existing coop/run modifications. Low capital barrier.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(74,124,89,0.15); color:#6ab07a;">🐇</div>
+                <h3>Rabbits</h3>
+                <span class="badge badge-success">Lowest Risk</span>
+                <p style="margin-top:1rem;"><strong>Pros:</strong> Extremely fast reproduction. Low space and feed costs. Meat, fur, and pet market. Can be raised in a garage or shed.</p>
+                <p style="margin-top:0.75rem;"><strong>Cons:</strong> Processing regulations vary by state. Market can be saturated for pet rabbits.</p>
+                <p style="margin-top:0.75rem;"><strong>Verdict:</strong> Excellent stealth side-hustle that runs parallel to chickens. Start with 1 buck and 2 does for under $200.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">🐝</div>
+                <h3>Bees</h3>
+                <span class="badge badge-warning">Moderate Risk</span>
+                <p style="margin-top:1rem;"><strong>Pros:</strong> Minimal space. Honey, beeswax, and pollination services. Complementary to all other farm ventures.</p>
+                <p style="margin-top:0.75rem;"><strong>Cons:</strong> Steep learning curve. Initial hive setup $300–600. Colony collapse risk. Some people are allergic.</p>
+                <p style="margin-top:0.75rem;"><strong>Verdict:</strong> Great diversification, but requires dedicated study. Best added once you have mastered one livestock species.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(139,38,53,0.15); color:#c95a6b;">🦃</div>
+                <h3>Turkeys / Guinea Fowl</h3>
+                <span class="badge badge-danger">Higher Risk</span>
+                <p style="margin-top:1rem;"><strong>Pros:</strong> Turkeys sell for premium holiday prices. Guinea fowl are excellent tick control and alarm systems.</p>
+                <p style="margin-top:0.75rem;"><strong>Cons:</strong> Turkeys are fragile as poults and need more space. Guinea fowl are noisy and roam far. Both can be difficult to sell at small scale.</p>
+                <p style="margin-top:0.75rem;"><strong>Verdict:</strong> Niche additions. Only pursue if you have identified a specific buyer (e.g., pre-sold Thanksgiving turkeys).</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(201,162,39,0.15); color:var(--accent-gold);">🌱</div>
+                <h3>Value-Added Products</h3>
+                <span class="badge badge-success">High Margin</span>
+                <p style="margin-top:1rem;"><strong>Compost/Fertilizer:</strong> Bag aged manure. Low overhead, consistent demand from gardeners.</p>
+                <p style="margin-top:0.75rem;"><strong>Education:</strong> Charge $25–50/person for "Raising Chicks 101" workshops once you have 2+ years of documented success.</p>
+                <p style="margin-top:0.75rem;"><strong>Content:</strong> Farm vlogs, e-books, or courses. Slow to monetize but builds brand equity.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top:2.5rem;">
+            <p><strong>The Recommended Expansion Sequence:</strong> <br>1) Year 2: Add ducks (leverage existing infrastructure).<br>2) Year 2–3: Add rabbits (parallel low-space operation).<br>3) Year 3+: Add goats (only if you have secured land, fencing budget, and a proven market for meat or dairy).<br>4) Year 4+: Add bees or niche poultry based on demand.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LEGAL STRUCTURE -->
+<section id="legal" class="fade-in" style="background:var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Governance</div>
+            <h2>Legal &amp; Business Structure Roadmap</h2>
+            <p>Transforming a side hustle into a legitimate agriculture company requires formalizing your operation at the right time — not too early (wasting money on compliance) and not too late (exposing personal assets).</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item active">
+                <div class="timeline-phase">Side-Hustle Phase (Now — Year 1)</div>
+                <h3 class="timeline-title">Sole Proprietorship by Default</h3>
+                <div class="timeline-content">
+                    <p>You do not need to file anything to start selling eggs or chicks. By conducting business, you are automatically a sole proprietor. This is fine for tiny scale.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Open a separate business checking account (use your name + DBA if desired).</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Track every expense and every sale in a spreadsheet from day one.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Report income on Schedule F (Farm Income) when you file taxes.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span><strong>Risk:</strong> Personal assets are exposed to liability. Do not operate this way once you have customers on your property or revenue over $5,000/year.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Formalization Trigger (Year 2–3)</div>
+                <h3 class="timeline-title">When to File an LLC</h3>
+                <div class="timeline-content">
+                    <p>Form a Single-Member LLC when any of the following are true:</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Annual revenue exceeds $5,000–$8,000.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>You invite customers onto your property (farm tours, pick-ups).</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>You plan to hire help or take on a partner.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>You want to build business credit or apply for agricultural grants.</li>
+                    </ul>
+                    <p style="margin-top:0.75rem;"><strong>Cost:</strong> LLC filing fees range from $50–$500 depending on your state. Annual report fees may apply. This is a small price for liability protection.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-phase">Scale Phase (Year 4+)</div>
+                <h3 class="timeline-title">S-Corp or Multi-Member LLC</h3>
+                <div class="timeline-content">
+                    <p>Once revenue is consistent and significant ($30,000+/year), consult a CPA about electing S-Corp taxation. This can reduce self-employment tax burden.</p>
+                    <ul style="margin-top:0.75rem; color:var(--text-secondary); list-style:none;">
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>If you bring on investors or partners, convert to a Multi-Member LLC or C-Corp.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Consider agricultural cooperatives if scaling with neighboring farms.</li>
+                        <li style="padding-left:1.25rem; position:relative; margin-bottom:0.5rem;"><span style="position:absolute; left:0; color:var(--accent-amber);">—</span>Separate all personal and business finances absolutely. Use business credit cards.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-grid" style="margin-top:3rem;">
+            <div class="card">
+                <h3>Records to Track from Day One</h3>
+                <ul>
+                    <li>Date and source of every bird purchased</li>
+                    <li>Feed purchases (date, quantity, cost, supplier)</li>
+                    <li>Egg production count (daily or weekly)</li>
+                    <li>All sales (item, buyer, date, amount, payment method)</li>
+                    <li>Medical treatments, deaths, and culls</li>
+                    <li>Mileage for farm-related trips</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Zoning &amp; Compliance Checklist</h3>
+                <ul>
+                    <li>Verify city/town zoning allows poultry on your lot</li>
+                    <li>Check HOA rules (they override city law)</li>
+                    <li>Confirm setback distances for coops</li>
+                    <li>Check if roosters are prohibited</li>
+                    <li>Research egg/chick sales regulations in your state</li>
+                    <li>Some states require manure management plans</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Tax &amp; Liability Basics</h3>
+                <ul>
+                    <li>Set aside 25–30% of profit for taxes</li>
+                    <li>Farm income reported on Schedule F</li>
+                    <li>Deductible expenses: feed, housing, equipment, mileage</li>
+                    <li>Liability insurance for home-based farms: ~$300–600/year</li>
+                    <li>Do not let customers enter animal pens unsupervised</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RISK ANALYSIS -->
+<section id="risks" class="fade-in">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">Contingency</div>
+            <h2>Risk Analysis &amp; Mitigation</h2>
+            <p>Every agricultural venture faces predictable threats. The disciplined operator anticipates them and builds systems to survive them.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon" style="background:rgba(139,38,53,0.15); color:#c95a6b;">💀</div>
+                <h3>Chick Mortality</h3>
+                <span class="badge badge-danger">High Probability</span>
+                <p style="margin-top:1rem;">Baby chicks are fragile. Pasty butt, overheating, chilling, and shipping stress kill 5–15% of chicks routinely.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Buy locally from a reputable breeder so you can inspect health. Use a brooder plate instead of a heat lamp (safer temperature control). Check on them 3× daily for the first two weeks. Have electrolytes ready.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(139,38,53,0.15); color:#c95a6b;">🦊</div>
+                <h3>Predator Loss</h3>
+                <span class="badge badge-danger">High Probability</span>
+                <p style="margin-top:1rem;">Raccoons, hawks, foxes, and neighborhood dogs are the #1 cause of total flock loss for small operations.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Use ½-inch hardware cloth on all openings (not chicken wire). Bury an 12-inch apron underground around the run. Use dual-action latches. Close coop doors before dusk. Install motion-activated lights.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">📉</div>
+                <h3>Low Margins at Tiny Scale</h3>
+                <span class="badge badge-warning">Guaranteed</span>
+                <p style="margin-top:1rem;">With only 2–3 birds, your revenue will not cover your time. Feed costs eat most of the profit from egg sales.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Treat Phase 1 as an apprenticeship, not a job. Do not quit your day job. Focus on building asset value (genetics, reputation, systems) rather than immediate cash flow. Supplement feed with kitchen scraps and free-ranging to cut costs.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">🧬</div>
+                <h3>Genetic Bottleneck</h3>
+                <span class="badge badge-warning">Critical</span>
+                <p style="margin-top:1rem;">Starting with only 2–3 chicks means severe inbreeding if you try to hatch from them without adding outside bloodlines.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Do not sell "breeding stock" until you have introduced at least one unrelated rooster and 2 unrelated hens. Cull weak birds ruthlessly. Keep meticulous pedigree records.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">🏘️</div>
+                <h3>Zoning &amp; HOA Restrictions</h3>
+                <span class="badge badge-warning">Location-Dependent</span>
+                <p style="margin-top:1rem;">Many residential areas cap flocks at 4–6 hens, ban roosters, prohibit commercial sales, or ban livestock entirely via HOA.</p>
+                    <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Call your city zoning office and review HOA bylaws BEFORE buying birds. If you plan to scale, buy or rent land in an agricultural zone. Never assume rural = unrestricted.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(139,38,53,0.15); color:#c95a6b;">🦠</div>
+                <h3>Disease &amp; Biosecurity</h3>
+                <span class="badge badge-danger">Moderate Probability</span>
+                <p style="margin-top:1rem;">Newcastle disease, avian influenza, coccidiosis, and Marek's disease can wipe out small flocks.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Buy vaccinated chicks when possible. Quarantine any new birds for 30 days. Limit visitors to your coop. Do not visit poultry shows and then return to your flock without changing clothes and boots. Practice "all-in, all-out" cleaning between batches.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">🏗️</div>
+                <h3>Overbuilding Too Early</h3>
+                <span class="badge badge-warning">Common Mistake</span>
+                <p style="margin-top:1rem;">Spending $2,000 on a coop before you know if you enjoy the work or if your zoning allows scale is a capital trap.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Build the minimum viable infrastructure for year one. Reinforce cheaply. Only invest in permanent structures once you have 18 months of proven operation and a clear path to 15+ birds.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:rgba(184,134,11,0.15); color:#d4a017;">📢</div>
+                <h3>Market Limitations</h3>
+                <span class="badge badge-warning">Variable</span>
+                <p style="margin-top:1rem;">Heritage gamefowl is a niche market. There may not be local buyers willing to pay premium prices.</p>
+                <p style="margin-top:0.75rem;"><strong>Mitigation:</strong> Build an online presence from day one. Join gamefowl and heritage breed forums, Facebook groups, and poultry swap networks. Be willing to ship hatching eggs. Diversify into table eggs and compost to buffer slow breeding-stock sales.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SUMMARY / NEXT STEPS -->
+<section class="fade-in" style="background:var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header" style="text-align:center; margin:0 auto 3rem;">
+            <div class="eyebrow">The Decision</div>
+            <h2>What Is Worth Doing Early — And What Is Not</h2>
+        </div>
+
+        <div class="card-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="card" style="border-color:rgba(74,124,89,0.3);">
+                <h3 style="color:#6ab07a;">✓ Worth Doing Now</h3>
+                <ul style="margin-top:1rem;">
+                    <li>Researching your exact zoning and HOA rules</li>
+                    <li>Buying 2–3 healthy, local Spangled Hatch chicks</li>
+                    <li>Building a simple, predator-proof brooder and coop</li>
+                    <li>Tracking every expense in a spreadsheet</li>
+                    <li>Documenting your journey for future brand equity</li>
+                    <li>Networking with heritage poultry breeders online</li>
+                    <li>Composting manure from day one</li>
+                </ul>
+            </div>
+            <div class="card" style="border-color:rgba(139,38,53,0.3);">
+                <h3 style="color:#c95a6b;">✗ Not Worth Doing Yet</h3>
+                <ul style="margin-top:1rem;">
+                    <li>Forming an LLC before you have revenue</li>
+                    <li>Buying an expensive prefab coop</li>
+                    <li>Buying an incubator before you have proven bloodlines</li>
+                    <li>Buying goats or major livestock in year one</li>
+                    <li>Advertising "breeding stock" from only 2–3 birds</li>
+                    <li>Quitting your job to farm full-time</li>
+                    <li>Free-ranging without predator protection</li>
+                    <li>Expecting profit in the first 12 months</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:4rem;">
+            <p style="color:var(--text-secondary); font-size:1.125rem; max-width:700px; margin:0 auto 2rem;">This plan is not a promise of wealth. It is a map for those willing to work with discipline, reinvest with patience, and build something real from almost nothing.</p>
+            <a href="#" class="btn btn-primary" onclick="window.print(); return false;">Print This Plan</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer style="background:var(--bg-primary); border-top:1px solid var(--border); padding:3rem 0; text-align:center;">
+    <div class="container">
+        <p style="color:var(--text-secondary); font-size:0.875rem;">Built for the disciplined empire-builder. From three chicks to dominion — one harvest at a time.</p>
+        <p style="color:var(--accent-iron); font-size:0.75rem; margin-top:1rem; text-transform:uppercase; letter-spacing:0.1em;">⚒ Forge &amp; Roost Agricultural Ventures ⚒</p>
+        <p style="color:var(--text-secondary); font-size:0.75rem; margin-top:1.5rem; opacity:0.6;">Disclaimer: This document is for educational and strategic planning purposes only. Consult a qualified attorney, CPA, and local zoning authority before making business or livestock decisions. Prices and regulations vary by location and time.</p>
+    </div>
+</footer>
+
+<script>
+    // Expandable sections
+    function toggleExpand(button) {
+        const expandable = button.parentElement;
+        expandable.classList.toggle('active');
+    }
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Animate progress bars if they exist in this section
+                const progressBars = entry.target.querySelectorAll('.progress-fill');
+                progressBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    if (width) {
+                        bar.style.width = width + '%';
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '100%';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'rgba(10,10,10,0.95)';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.padding = '1rem';
+        navLinks.style.borderBottom = '1px solid var(--border)';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.querySelector('.nav-links').style.display = 'none';
+            }
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
